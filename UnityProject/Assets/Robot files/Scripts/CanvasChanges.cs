@@ -21,7 +21,7 @@ public class CanvasChanges : MonoBehaviour
     greencube_pos_x_area, greencube_pos_y_area, greencube_pos_z_area,
     bluecube_pos_x_area, bluecube_pos_y_area, bluecube_pos_z_area;
 
-    public GameObject ChessObj;
+    public GameObject ChessObj, CalibPattern;
     public InputField chess_pos_x_robot, chess_pos_y_robot, chess_pos_z_robot,
     chess_pos_x_cam, chess_pos_y_cam, chess_pos_z_cam;
 
@@ -129,5 +129,9 @@ public class CanvasChanges : MonoBehaviour
     public void ChessToogle(bool newValue)
     {
         ChessObj.SetActive(newValue);
+    }
+    public void CalibPatternToogle(bool newValue)
+    {
+        CalibPattern.SetActive(newValue);
     }
 }
