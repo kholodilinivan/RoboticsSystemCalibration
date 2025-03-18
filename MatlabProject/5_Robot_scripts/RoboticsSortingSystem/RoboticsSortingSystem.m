@@ -2,7 +2,7 @@ clc
 clear all
 name = "Matlab";
 Client = TCPInit('127.0.0.1',55001,name);
-load('Omni_Calib_Results_116m.mat'); % Calib parameters
+load('Omni_Calib_Results_Sim.mat'); % Calib parameters
 ocam_model = calib_data.ocam_model; % Calib parameters
 i = calib_data.n_ima;
 calib_data.L(i+1)={'TestImages/image.jpg'};

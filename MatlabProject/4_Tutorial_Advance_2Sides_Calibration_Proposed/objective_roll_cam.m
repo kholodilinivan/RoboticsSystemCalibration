@@ -1,0 +1,68 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  
+%   Author: Ivan Kholodilin
+%   email: kholodilin@bit.edu.cn
+%   website: www.ilabit.org
+%
+%   Copyright (C) 2020 Ivan Kholodilin
+%   
+%   This program is free software; you can redistribute it and/or modify
+%   it under the terms of the GNU General Public License as published by
+%   the Free Software Foundation; either version 2 of the License, or
+%   (at your option) any later version.
+%   
+%   This program is distributed in the hope that it will be useful,
+%   but WITHOUT ANY WARRANTY; without even the implied warranty of
+%   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+%   GNU General Public License for more details.
+%   
+%   You should have received a copy of the GNU General Public License
+%   along with this program; if not, write to the Free Software
+%   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
+%   USA
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+function obj = objective_roll_cam(roll)
+
+global ocam_model;
+global cam_pitch_opt;
+global cam_yaw_opt;
+global Cent;
+global Cent1;
+global tan_h;
+global tan_h1;
+global count;
+
+% count = 1;
+
+clf;
+h2 = [];
+h3 = [];
+x = [];
+y = [];
+x1 = [];
+y1 = [];
+[x,y] = mapping_points(Cent,roll,cam_pitch_opt,cam_yaw_opt,0,0,1,ocam_model);
+ax1 = subplot(2,1,1);
+scatter(ax1,x,y,5,'filled'); % Laser intersections
+hold on;
+grid on;
+h2 = lsline(ax1);
+% second
+[x1,y1] = mapping_points(Cent1,roll,cam_pitch_opt,cam_yaw_opt,0,0,1,ocam_model);
+ax2 = subplot(2,1,2);
+scatter(ax2,x1,y1,5,'filled'); % Laser intersections
+h3 = lsline(ax2);
+% horizontal
+left = diff(h2(1).YData);
+right = diff(h3(1).YData);
+
+left = y(1);
+right = y1(1);
+
+% obj = abs(abs(left) - abs(right));
+obj = abs(abs(left) - abs(right));
+% obj = x(1) - x1(1);
+    
+tan_h = x;
+tan_h1 = x1;
+end
